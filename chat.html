@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>LinkChat Room</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+</head>
+<body>
+  <div class="chat-container">
+    <!-- Header -->
+    <header class="chat-header">
+      <div class="user-info">
+        <div class="avatar-box">
+          <i class="fa-solid fa-user"></i>
+          <span id="statusIndicator" class="status-indicator offline"></span>
+        </div>
+        <div class="header-text">
+          <h3 id="peerName">ચેટ મિત્ર</h3>
+          <span id="userStatus" class="user-status">સાથી જોડાય તેની રાહ જોવાય છે...</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <!-- Disappearing Messages Toggle -->
+        <button id="autoDeleteBtn" title="15 મિનિટમાં ગાયબ ચેટ (On/Off)"><i class="fa-solid fa-clock"></i></button>
+        <!-- Dark/Light Mode Switcher -->
+        <button id="themeToggleBtn" title="થીમ બદલો"><i class="fa-solid fa-moon"></i></button>
+        <!-- Clear Chat Button -->
+        <button id="clearChatBtn" title="બધી ચેટ ડિલીટ કરો"><i class="fa-solid fa-trash-can"></i></button>
+        <!-- Share Link Button -->
+        <button id="shareLinkBtn" title="લિંક કોપી કરો"><i class="fa-solid fa-share-nodes"></i></button>
+      </div>
+    </header>
+
+    <!-- Pinned Message Bar -->
+    <div id="pinnedBar" class="pinned-bar hidden">
+      <i class="fa-solid fa-thumbtack"></i>
+      <span id="pinnedText">પિન કરેલ મેસેજ...</span>
+      <i id="unpinBtn" class="fa-solid fa-xmark"></i>
+    </div>
+
+    <!-- Share Banner -->
+    <div id="shareBanner" class="share-banner">
+      <span>આ રૂમની લિંક તમારા સાથી સાથે શેર કરો:</span>
+      <button id="copyBannerLinkBtn"><i class="fa-solid fa-copy"></i> કોપી</button>
+    </div>
+
+    <!-- Messages Area -->
+    <div id="chatMessages" class="chat-messages">
+      <div class="system-message">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>આ ચેટ સુરક્ષિત છે.</span>
+      </div>
+    </div>
+
+    <!-- Reply Preview Box -->
+    <div id="replyBar" class="reply-bar hidden">
+      <div class="reply-content">
+        <span id="replyName">મેસેજ નો જવાબ આપી રહ્યા છો</span>
+        <p id="replyText">મેસેજ ટેક્સ્ટ...</p>
+      </div>
+      <i id="cancelReplyBtn" class="fa-solid fa-xmark"></i>
+    </div>
+
+    <!-- Input Bar -->
+    <form id="messageForm" class="chat-input-bar">
+      <input type="file" id="mediaInput" accept="image/*,video/*" style="display: none;">
+      
+      <button type="button" id="attachBtn" class="attach-btn" title="ફોટો/વિડીયો મોકલો">
+        <i class="fa-solid fa-paperclip"></i>
+      </button>
+
+      <input type="text" id="messageInput" placeholder="મેસેજ ટાઈપ કરો..." autocomplete="off">
+      
+      <!-- Voice Note Button -->
+      <button type="button" id="voiceBtn" class="voice-btn" title="વોઇસ રેકોર્ડ કરો">
+        <i class="fa-solid fa-microphone"></i>
+      </button>
+
+      <button type="submit" id="sendMsgBtn" class="send-btn">
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "rules": {
+    "rooms": {
+      "$roomId": {
+        ".read": "auth != null",
+        
+        "users": {
+          ".write": "auth != null",
+          "$userId": {
+            ".validate": "$userId === auth.uid"
+          }
+        },
+
+        "messages": {
+          ".write": "auth != null && data.parent().child('users').hasChild(auth.uid)",
+          "$messageId": {
+            ".validate": "newData.hasChildren(['senderId', 'type', 'content', 'timestamp']) && newData.child('senderId').val() === auth.uid"
+          }
+        },
+
+        "typing": {
+          "$userId": {
+            ".write": "auth != null && $userId === auth.uid"
+          }
+        }
+      }
+    }
+  }
+}
